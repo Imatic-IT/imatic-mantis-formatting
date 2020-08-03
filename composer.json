@@ -1,0 +1,9 @@
+{
+    "name": "imatic-it/imatic-formatting",
+    "type": "mantisbt-plugin",
+    "require": {
+        "php": "^7.4",
+        "composer/installers": "^1.9",
+        "league/commonmark": "^1.5.3"
+    }
+}
