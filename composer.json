@@ -1,6 +1,7 @@
 {
     "name": "imatic-it/imatic-formatting",
     "type": "mantisbt-plugin",
+    "license": "GPL-2.0-or-later",
     "require": {
         "php": "^7.4",
         "composer/installers": "^1.9",
