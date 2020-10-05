@@ -8,7 +8,7 @@ class ImaticFormattingPlugin extends MantisPlugin
 	{
 		$this->name = 'Imatic formatting';
 		$this->description = 'Formatting';
-		$this->version = '0.0.1';
+		$this->version = '0.0.2';
 		$this->requires = [
 			'MantisCore' => '2.0.0',
 		];
@@ -31,7 +31,7 @@ class ImaticFormattingPlugin extends MantisPlugin
 		static $converter = null;
 		if ($converter === null) {
 			$converter = new GithubFlavoredMarkdownConverter([
-				'html_input' => 'strip',
+				'html_input' => 'escape',
 				'allow_unsafe_links' => false,
 			]);
 		}
