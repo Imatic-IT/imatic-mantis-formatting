@@ -8,7 +8,7 @@ class ImaticFormattingPlugin extends MantisPlugin
 	{
 		$this->name = 'Imatic formatting';
 		$this->description = 'Formatting';
-		$this->version = '0.0.2';
+		$this->version = '0.0.3';
 		$this->requires = [
 			'MantisCore' => '2.0.0',
 		];
@@ -23,6 +23,12 @@ class ImaticFormattingPlugin extends MantisPlugin
 		return [
 			'EVENT_DISPLAY_FORMATTED' => 'display_formatted_hook',
 			'EVENT_LAYOUT_RESOURCES' => 'layout_resources_hook',
+		];
+	}
+
+	public function config(): array {
+		return [
+			'include_prism' => true,
 		];
 	}
 
@@ -47,7 +53,17 @@ class ImaticFormattingPlugin extends MantisPlugin
 		return $this->convert($p_string);
 	}
 
+	private function prism_includes() {
+		if (!plugin_config_get('include_prism', null, true)) {
+			return '';
+		}
+
+		return '<link rel="stylesheet" type="text/css" href="' . plugin_file('prism.css') . '&v=' . $this->version . '" />'
+				. '<script async type="text/javascript" src="' . plugin_file( 'prism.js' ) . '&v=' . $this->version . '"></script>';
+	}
+
 	public function layout_resources_hook() {
-		return '<link rel="stylesheet" type="text/css" href="' . plugin_file('styles.css') . '&v=' . $this->version . '" />';
+		return '<link rel="stylesheet" type="text/css" href="' . plugin_file('styles.css') . '&v=' . $this->version . '" />'
+				. $this->prism_includes();
 	}
 }
