@@ -1,3 +1,9 @@
 a p {
   display: inherit;
 }
+#relationships td p {
+  display: inline;
+}
+[id^="roadmap_"] .widget-main p {
+    display: inline;
+}
