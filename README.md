@@ -2,8 +2,16 @@
 
 # Imatic formatting
 
+## Purpose
+
 Converts markdown into html.
 
+## Installation
+
+```
+composer config --unset platform.php
+composer require imatic-it/imatic-formatting
+```
 
 ## Code highlighting
 
