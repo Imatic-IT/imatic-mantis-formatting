@@ -1,6 +1,10 @@
 <?php
 
+use League\CommonMark\CommonMarkConverter;
+use League\CommonMark\Environment;
+use League\CommonMark\Extension\InlinesOnly\InlinesOnlyExtension;
 use League\CommonMark\GithubFlavoredMarkdownConverter;
+use League\CommonMark\MarkdownConverterInterface;
 
 class ImaticFormattingPlugin extends MantisPlugin
 {
@@ -8,7 +12,7 @@ class ImaticFormattingPlugin extends MantisPlugin
 	{
 		$this->name = 'Imatic formatting';
 		$this->description = 'Formatting';
-		$this->version = '0.0.4';
+		$this->version = '0.0.5';
 		$this->requires = [
 			'MantisCore' => '2.0.0',
 		];
@@ -32,8 +36,21 @@ class ImaticFormattingPlugin extends MantisPlugin
 		];
 	}
 
-	private function getConverter(): GithubFlavoredMarkdownConverter
-	{
+	private function getOneLineConverter(): MarkdownConverterInterface {
+		static $converter = null;
+		if ($converter === null) {
+			$environment = new Environment();
+			$environment->addExtension(new InlinesOnlyExtension());
+			$converter = new CommonMarkConverter([
+				'html_input' => 'escape',
+				'allow_unsafe_links' => false,
+			], $environment);
+		}
+
+		return $converter;
+	}
+
+	private function getMultiLineConverter(): MarkdownConverterInterface {
 		static $converter = null;
 		if ($converter === null) {
 			$converter = new GithubFlavoredMarkdownConverter([
@@ -45,12 +62,14 @@ class ImaticFormattingPlugin extends MantisPlugin
 		return $converter;
 	}
 
-	private function convert(string $text): string {
-		return string_process_bugnote_link(string_process_bug_link(mention_format_text($this->getConverter()->convertToHtml($text))));
+	private function convert(MarkdownConverterInterface $converter, string $text): string {
+		return string_process_bugnote_link(string_process_bug_link(mention_format_text($converter->convertToHtml($text))));
 	}
 
 	public function display_formatted_hook( $p_event, $p_string, $p_multiline = true ) {
-		return $this->convert($p_string);
+		$converter = $p_multiline ? $this->getMultiLineConverter() : $this->getOneLineConverter();
+
+		return $this->convert($converter, $p_string);
 	}
 
 	private function prism_includes() {
@@ -63,7 +82,6 @@ class ImaticFormattingPlugin extends MantisPlugin
 	}
 
 	public function layout_resources_hook() {
-		return '<link rel="stylesheet" type="text/css" href="' . plugin_file('styles.css') . '&v=' . $this->version . '" />'
-				. $this->prism_includes();
+		return $this->prism_includes();
 	}
 }
