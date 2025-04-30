@@ -62,15 +62,19 @@ class ImaticFormattingPlugin extends MantisPlugin
 		return $converter;
 	}
 
-	private function convert(MarkdownConverterInterface $converter, string $text): string {
+	public function convert(string $text): string {
+        $converter = $this->getConverter();
 		return string_process_bugnote_link(string_process_bug_link(mention_format_text($converter->convertToHtml($text))));
 	}
 
 	public function display_formatted_hook( $p_event, $p_string, $p_multiline = true ) {
-		$converter = $p_multiline ? $this->getMultiLineConverter() : $this->getOneLineConverter();
-
-		return $this->convert($converter, $p_string);
+		return $this->convert($p_string);
 	}
+
+    private function getConverter($p_multiline = true): MarkdownConverterInterface
+    {
+        return $p_multiline ? $this->getMultiLineConverter() : $this->getOneLineConverter();
+    }
 
 	private function prism_includes() {
 		if (!plugin_config_get('include_prism', null, true)) {
