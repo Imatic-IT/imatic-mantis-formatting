@@ -21,3 +21,47 @@ It can be disabled with:
 ```php
 $g_plugin_ImaticFormatting_include_prism = false;
 ```
+
+
+## ToastUI Editor (WYSIWYG)
+
+This plugin integrates ToastUI Editor to provide a modern WYSIWYG and Markdown editor for text areas in MantisBT.
+
+You can enable or configure the editor in your plugin config.
+Example:
+
+```php
+public function config(): array
+{
+    return [
+        'include_prism' => true,
+        'toastui_editor' => [
+            'enabled' => true,
+            'textAreas'=> [
+                'description',
+                'additional_info',
+                'additional_information',
+                'bugnote_text'
+            ],
+            'options' => [
+                'initialEditType' => 'wysiwyg', // 'markdown' or 'wysiwyg'
+                'previewStyle' => 'tab', // 'tab' or 'vertical'
+                'height' => false, // Use false for default height
+                'useDefaultHTMLSanitizer' => true,
+                'useCommandShortcut' => true,
+                'useDefaultHTMLSanitizerOptions' => [
+                    'allowAttributes' => ['class', 'style'],
+                    'allowTags' => ['a', 'b', 'i', 'strong', 'em', 'p', 'br', 'ul', 'ol', 'li', 'code', 'pre'],
+                ],
+            ],
+        ]
+    ];
+}
+```
+
+### Features
+- Markdown and WYSIWYG editing mode
+- Live preview (tab or vertical split)
+- Custom HTML sanitization with [DOMPurify](https://github.com/cure53/DOMPurify)
+- Optional keyboard shortcuts
+- Automatic synchronization with MantisBT text areas
