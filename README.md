@@ -44,7 +44,7 @@ public function config(): array
                 'bugnote_text'
             ],
             'options' => [
-                'initialEditType' => 'wysiwyg', // 'markdown' or 'wysiwyg'
+                'initialEditType' => 'markdown', // 'markdown' or 'wysiwyg'
                 'previewStyle' => 'tab', // 'tab' or 'vertical'
                 'height' => false, // Use false for default height
                 'useDefaultHTMLSanitizer' => true,

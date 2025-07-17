@@ -1,0 +1,204 @@
+.toastui-editor-defaultUI {
+    font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 13px;
+}
+
+.toastui-editor-defaultUI .ProseMirror {
+    font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 13px;
+}
+
+.toastui-editor-toolbar {
+    height: 32px !important;
+}
+
+.toastui-editor-md-tab-container {
+    height: 28px !important;
+    font-size: 12px !important;
+    line-height: 28px !important;
+    margin-bottom: 4px;
+}
+
+.toastui-editor-defaultUI-toolbar {
+    height: 28px !important;
+}
+
+.toastui-editor-toolbar-group {
+    margin-right: 4px;
+    position: relative;
+    top: -2px;
+}
+
+.toastui-editor-toolbar-icons {
+    margin: 0 2px !important;
+}
+
+.toastui-editor-tabs {
+    height: 28px !important;
+    padding: 0 8px !important;
+    position: relative;
+    top: -13px;
+}
+
+.toastui-editor-tabs .tab-item {
+    height: 28px !important;
+}
+
+.toastui-editor-toolbar-divider {
+    position: relative;
+    top: -8px;
+}
+
+/*Mention*/
+
+.mention-is-active{
+    background-color: #5090C1;
+}
+
+
+/* AUTOCOMPLETE*/
+[class^="tribute-container-"],
+[class^="tribute-container-"] ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+[class^="tribute-container-"] {
+    display: none;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-height: 200px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    transition: width 0.15s ease;
+    z-index: 1000;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+[class^="tribute-container-"] .tribute-item {
+    cursor: pointer;
+}
+
+[class^="tribute-container-"] .tribute-highlight {
+    background-color: #007bff;
+    color: white;
+    padding: 0 2px;
+}
+
+
+
+
+/* 1*/
+
+
+
+.tribute-container-0,
+.tribute-container-0 ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.tribute-container-0 {
+    display: none;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    max-height: 200px;
+    overflow-y: auto;
+
+    overflow-x: hidden;
+    transition: width 0.15s ease;
+    z-index: 1000;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+
+.tribute-container-0 .tribute-item {
+    cursor: pointer;
+}
+
+
+.tribute-container-0 .tribute-highlight {
+    background-color: #007BFF;
+    color: white;
+    padding: 0 2px;
+}
+
+/*2*/
+.tribute-container-1,
+.tribute-container-1 ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.tribute-container-1 {
+    display: none;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    max-height: 200px;
+    overflow-y: auto;
+
+    overflow-x: hidden;
+    transition: width 0.15s ease;
+    z-index: 1000;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+
+.tribute-container-1 .tribute-item {
+    cursor: pointer;
+}
+
+
+.tribute-container-1 .tribute-highlight {
+    background-color: #007BFF;
+    color: white;
+    padding: 0 2px;
+}
+
+/*3*/
+.tribute-container-2,
+.tribute-container-2 ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.tribute-container-2 {
+    display: none;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    max-height: 200px;
+    overflow-y: auto;
+
+    overflow-x: hidden;
+    transition: width 0.15s ease;
+    z-index: 1000;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+
+.tribute-container-2 .tribute-item {
+    cursor: pointer;
+}
+
+
+.tribute-container-2 .tribute-highlight {
+    background-color: #007BFF;
+    color: white;
+    padding: 0 2px;
+}

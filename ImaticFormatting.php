@@ -12,7 +12,7 @@ class ImaticFormattingPlugin extends MantisPlugin
     {
         $this->name = 'Imatic formatting';
         $this->description = 'Formatting';
-        $this->version = '0.1.0';
+        $this->version = '0.2.0';
         $this->requires = [
             'MantisCore' => '2.0.0',
         ];
@@ -44,7 +44,7 @@ class ImaticFormattingPlugin extends MantisPlugin
                     'bugnote_text'
                 ],
                 'options' => [
-                    'initialEditType' => 'wysiwyg', # 'markdown' or 'wysiwyg'
+                    'initialEditType' => 'markdown', # 'markdown' or 'wysiwyg'
                     'previewStyle' => 'tab', # 'tab' or 'vertical'
                     'height' => false, // SET NUMBER or false for default height from mantisbt + BAR height
                     'useDefaultHTMLSanitizer' => true,
@@ -116,8 +116,10 @@ class ImaticFormattingPlugin extends MantisPlugin
     {
         $config = htmlspecialchars(json_encode(plugin_config_get('toastui_editor', [], true)));
 
-        return '<link rel="stylesheet" type="text/css" href="' . plugin_file('toast/toastui-editor.min.css') . '&v=' . $this->version . '" />'
+        return '<link rel="stylesheet" type="text/css" href="' . plugin_file('toast/toastui-editor.min.css') . '&v=' . $this->version . '" />
+                <link rel="stylesheet" type="text/css" href="' . plugin_file('toast/custom.css') . '&v=' . $this->version . '" />'
             . '<script type="text/javascript" src="' . plugin_file('toast/toastui-editor.min.js') . '&v=' . $this->version . '"></script>
-		        <script id="imaticFormatting" data-data="' . $config . '" type="text/javascript" src="' . plugin_file('toast/index.js') . '&v=' . $this->version . '"></script>';
+		        <script  id="imaticFormatting" data-data="' . $config . '" type="text/javascript" src="' . plugin_file('main.js') . '&v=' . $this->version . '"></script>';
+
     }
 }
