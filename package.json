@@ -4,8 +4,9 @@
   "description": "[![License: GPL-2.0-or-later](https://img.shields.io/badge/License-GPL--2.0--or--later-blue.svg)](https://spdx.org/licenses/GPL-2.0-or-later.html)",
   "main": "index.js",
   "scripts": {
-    "build": "webpack",
-    "watch": "webpack --watch"
+    "build:dev": "webpack --mode development",
+    "build:prod": "webpack --mode production",
+    "watch": "webpack --watch --mode development"
   },
   "keywords": [],
   "author": "",

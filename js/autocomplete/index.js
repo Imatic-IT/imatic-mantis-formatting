@@ -6,37 +6,49 @@ export function createAutocomplete(editor) {
     const handlers = getHandlerForMention();
     const editorContents = document.querySelectorAll('.toastui-editor .ProseMirror');
     const tributeInstances = [];
+    let isActive = false;
+
+    function hideAllTributeContainers() {
+        document.querySelectorAll('.tribute-container').forEach((container) => {
+            container.style.display = 'none';
+        });
+    }
 
     editorContents.forEach((editorContent) => {
         if (editorContent.__tribute) {
             editorContent.__tribute.detach(editorContent);
             editorContent.__tribute = null;
         }
+        document.querySelectorAll(`.tribute-container`).forEach(container => {
+            container.remove();
+        });
     });
 
     const observer = new MutationObserver((mutations) => {
+        if (!isActive) {
+            hideAllTributeContainers();
+            return;
+        }
         mutations.forEach((mutation) => {
             if (mutation.addedNodes.length) {
                 editorContents.forEach((editorContent, index) => {
                     const tributeContainer = document.querySelector(`.tribute-container-${index}`);
                     if (tributeContainer) {
-                        requestAnimationFrame(() => {
+                        const editorRect = editorContent.getBoundingClientRect();
+                        const caretInfo = getCaretInfo();
+                        const rect = caretInfo.node ? caretInfo.node.parentElement.getBoundingClientRect() : editorRect;
+
+                        tributeContainer.style.width = `${editorRect.width}px`;
+                        tributeContainer.style.left = `${rect.left + window.scrollX - 25}px`;
+
+                        const items = tributeContainer.querySelectorAll('li');
+                        if (items.length === 0 || (items.length === 1 && items[0].textContent === 'No matching found')) {
                             tributeContainer.style.display = 'none';
-                            const editorRect = editorContent.getBoundingClientRect();
-                            const caretInfo = getCaretInfo();
-                            const rect = caretInfo.node ? caretInfo.node.parentElement.getBoundingClientRect() : editorRect;
-
-                            tributeContainer.style.width = `${editorRect.width}px`;
-                            tributeContainer.style.left = `${rect.left + window.scrollX - 25}px`;
-                            tributeContainer.style.top = `${rect.top + window.scrollY + rect.height}px`;
-
-                            const items = tributeContainer.querySelectorAll('li');
-                            if (items.length === 0 || (items.length === 1 && items[0].textContent === 'No matching found')) {
-                                tributeContainer.style.display = 'none';
-                            } else {
-                                tributeContainer.style.display = 'block';
-                            }
-                        });
+                        } else if (isActive) {
+                            tributeContainer.style.display = 'block';
+                        } else {
+                            tributeContainer.style.display = 'none';
+                        }
                     }
                 });
             }
@@ -58,11 +70,9 @@ export function createAutocomplete(editor) {
                 const filtered = handlers
                     .filter(user => user.key.toLowerCase().startsWith(text.toLowerCase()))
                     .map(user => ({key: user.value, value: user.key}));
-                if (filtered.length === 0) {
-                    const tributeContainer = document.querySelector(`.tribute-container-${index}`);
-                    if (tributeContainer) {
-                        tributeContainer.style.display = 'none';
-                    }
+                const tributeContainer = document.querySelector(`.tribute-container-${index}`);
+                if (filtered.length === 0 && tributeContainer) {
+                    tributeContainer.style.display = 'none';
                 }
                 cb(filtered);
             },
@@ -73,6 +83,10 @@ export function createAutocomplete(editor) {
             lookup: 'key',
             fillAttr: 'value',
             selectTemplate: function (item) {
+                const tributeContainer = document.querySelector(`.tribute-container-${index}`);
+                if (tributeContainer) {
+                    tributeContainer.style.display = 'none';
+                }
                 setTimeout(() => {
                     editorContent.focus();
                 }, 0);
@@ -111,20 +125,28 @@ export function createAutocomplete(editor) {
         editorContent.addEventListener('blur', () => {
             const tributeContainer = document.querySelector(`.tribute-container-${index}`);
             if (tributeContainer) {
+                tributeContainer.style.display = 'none';
                 tribute.hideMenu();
             }
         });
 
-        // editorContent.addEventListener('tribute-active-true', () => {
-        // });
-        // editorContent.addEventListener('tribute-active-false', () => {
-        // });
-        // editorContent.addEventListener('tribute-replaced', (e) => {
-        //     // tribute.hideMenu();
-        // });
-        //
-        // editorContent.addEventListener('input', () => {
-        // });
+        editorContent.addEventListener('tribute-active-true', () => {
+            isActive = true;
+        });
+        editorContent.addEventListener('tribute-active-false', () => {
+            isActive = false;
+            hideAllTributeContainers();
+            editorContent.focus();
+        });
+        editorContent.addEventListener('tribute-replaced', () => {
+            isActive = false;
+            const tributeContainer = document.querySelector(`.tribute-container-${index}`);
+            if (tributeContainer) {
+                tributeContainer.style.display = 'none';
+                // tributeContainer.remove();
+            }
+            tribute.hideMenu();
+        });
     });
 
     return tributeInstances;
