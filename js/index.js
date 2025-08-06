@@ -35,6 +35,7 @@ function initEditor(textArea, settings, onReady) {
             ['code', 'codeblock'],
             ['scrollSync']
         ],
+        autofocus: false
     });
     editor.on('change', () => {
         textArea.value = editor.getMarkdown();
