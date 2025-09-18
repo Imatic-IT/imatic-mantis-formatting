@@ -89,9 +89,20 @@ class ImaticFormattingPlugin extends MantisPlugin
 		return string_process_bugnote_link(string_process_bug_link(mention_format_text($converter->convertToHtml($text))));
 	}
 
-	public function display_formatted_hook( $p_event, $p_string, $p_multiline = true ) {
-		return $this->convert($p_string);
-	}
+    private function isHtml($string)
+    {
+        return $string != strip_tags($string);
+    }
+
+    public function display_formatted_hook($p_event, $p_string, $p_multiline = true)
+    {
+
+        if ($this->isHtml($p_string)) {
+            return $p_string;
+        }
+
+        return $this->convert($p_string);
+    }
 
     private function getConverter($p_multiline = true): MarkdownConverterInterface
     {
