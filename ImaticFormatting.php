@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/vendor/autoload.php';
+
 use League\CommonMark\CommonMarkConverter;
 use League\CommonMark\Environment;
 use League\CommonMark\Extension\InlinesOnly\InlinesOnlyExtension;
@@ -72,36 +74,44 @@ class ImaticFormattingPlugin extends MantisPlugin
 		return $converter;
 	}
 
-	private function getMultiLineConverter(): MarkdownConverterInterface {
-		static $converter = null;
-		if ($converter === null) {
-			$converter = new GithubFlavoredMarkdownConverter([
-				'html_input' => 'escape',
-				'allow_unsafe_links' => false,
-			]);
-		}
+    private function getMultiLineConverter(): MarkdownConverterInterface
+    {
+        static $converter = null;
+        if ($converter === null) {
+            $converter = new GithubFlavoredMarkdownConverter([
+                'html_input' => 'allow', // It is purified before usage by HTMLPurifier in display_formatted_hook method
+                'allow_unsafe_links' => false,
+            ]);
+        }
 
-		return $converter;
-	}
+        return $converter;
+    }
 
 	public function convert(string $text): string {
         $converter = $this->getConverter();
 		return string_process_bugnote_link(string_process_bug_link(mention_format_text($converter->convertToHtml($text))));
 	}
 
-    private function isHtml($string)
+    private function  purifyHtml($html)
     {
-        return $string != strip_tags($string);
+        $config = HTMLPurifier_Config::createDefault();
+
+        $config->set('HTML.Allowed', 'p,b,strong,i,em,u,a[href|target|rel],br,ul,ol,li,code,pre,span[class],h1,h2,h3,h4,h5,h6,blockquote,hr,img[src|alt|title|width|height]');
+        $config->set('HTML.SafeEmbed', true);
+        $config->set('HTML.SafeObject', true);
+        $config->set('HTML.SafeIframe', true);
+        $config->set('Attr.AllowedFrameTargets', ['_blank']);
+
+        $purifier = new \HTMLPurifier($config);
+        return $purifier->purify($html);
     }
+
 
     public function display_formatted_hook($p_event, $p_string, $p_multiline = true)
     {
+        $purified_html = $this->purifyHtml($p_string);
 
-        if ($this->isHtml($p_string)) {
-            return $p_string;
-        }
-
-        return $this->convert($p_string);
+        return $this->convert($purified_html);
     }
 
     private function getConverter($p_multiline = true): MarkdownConverterInterface
@@ -131,6 +141,5 @@ class ImaticFormattingPlugin extends MantisPlugin
                 <link rel="stylesheet" type="text/css" href="' . plugin_file('toast/custom.css') . '&v=' . $this->version . '" />'
             . '<script type="text/javascript" src="' . plugin_file('toast/toastui-editor.min.js') . '&v=' . $this->version . '"></script>
 		        <script  id="imaticFormatting" data-data="' . $config . '" type="text/javascript" src="' . plugin_file('main.js') . '&v=' . $this->version . '"></script>';
-
     }
 }

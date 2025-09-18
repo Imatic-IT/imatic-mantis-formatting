@@ -5,6 +5,12 @@
   "require": {
     "php": "^7.4",
     "composer/installers": "^1.9",
-    "league/commonmark": "2.6.0"
+    "league/commonmark": "2.6.0",
+    "ezyang/htmlpurifier": "^4.18"
+  },
+  "config": {
+    "allow-plugins": {
+      "composer/installers": true
+    }
   }
 }
