@@ -56,7 +56,14 @@ class ImaticFormattingPlugin extends MantisPlugin
                         'allowTags' => ['a', 'b', 'i', 'strong', 'em', 'p', 'br', 'ul', 'ol', 'li', 'code', 'pre'],
                     ],
                 ],
-            ]
+            ],
+            'html_purifier' => [
+                'allowed' => 'p,b,strong,i,em,u,a[href|target|rel],br,ul,ol,li,code,pre,span[class],h1,h2,h3,h4,h5,h6,blockquote,hr,img[src|alt|title|width|height]',
+                'safe_embed' => true,
+                'safe_object' => true,
+                'safe_iframe' => true,
+                'allowed_frame_targets' => ['_blank'],
+            ],
         ];
     }
 
@@ -96,11 +103,11 @@ class ImaticFormattingPlugin extends MantisPlugin
     {
         $config = HTMLPurifier_Config::createDefault();
 
-        $config->set('HTML.Allowed', 'p,b,strong,i,em,u,a[href|target|rel],br,ul,ol,li,code,pre,span[class],h1,h2,h3,h4,h5,h6,blockquote,hr,img[src|alt|title|width|height]');
-        $config->set('HTML.SafeEmbed', true);
-        $config->set('HTML.SafeObject', true);
-        $config->set('HTML.SafeIframe', true);
-        $config->set('Attr.AllowedFrameTargets', ['_blank']);
+        $config->set('HTML.Allowed', plugin_config_get('html_purifier.allowed'));
+        $config->set('HTML.SafeEmbed', plugin_config_get('html_purifier.safe_embed'));
+        $config->set('HTML.SafeObject', plugin_config_get('html_purifier.safe_object'));
+        $config->set('HTML.SafeIframe', plugin_config_get('html_purifier.safe_iframe'));
+        $config->set('Attr.AllowedFrameTargets', plugin_config_get('html_purifier.allowed_frame_targets'));
 
         $purifier = new \HTMLPurifier($config);
         return $purifier->purify($html);
