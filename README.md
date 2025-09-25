@@ -65,3 +65,26 @@ public function config(): array
 - Custom HTML sanitization with [DOMPurify](https://github.com/cure53/DOMPurify)
 - Optional keyboard shortcuts
 - Automatic synchronization with MantisBT text areas
+
+
+
+## Preview Test Pages
+
+The plugin provides **test pages** where you can see how your Markdown and HTML formatting will be rendered before using it in actual issues.
+
+1. Navigate to the **Plugin Configuration Page**:
+   `Manage -> Manage Plugins -> Imatic Formatting`
+
+2. Click on **"Test Issue Formatting Preview"** or open directly:
+   [/plugin.php?page=ImaticFormatting/test-issue-previews.php](./plugin.php?page=ImaticFormatting/test-issue-previews.php)
+
+3. You will find several preview sections:
+
+   - 📧 **HTML Rendered Preview** – see how HTML emails will render
+   - 📝 **Plain Text Preview** – view the plain text formatting
+   - ⚠️ **Broken Format Preview** – simulate text without plugin formatting
+   - 🔗 **Link Rendering & Query Parameters** – test links including query strings and `&` characters
+   - 🖋️ **Markdown Preview** – test all Markdown elements including headings, lists, blockquotes, code blocks, tables, images, links, and horizontal rules
+
+This is useful for verifying your formatting rules, link handling, WYSIWYG editor integration, and Markdown rendering be
+

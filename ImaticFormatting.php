@@ -14,15 +14,16 @@ class ImaticFormattingPlugin extends MantisPlugin
     {
         $this->name = 'Imatic formatting';
         $this->description = 'Formatting';
-        $this->version = '0.2.0';
+        $this->version = '0.2.1';
         $this->requires = [
             'MantisCore' => '2.0.0',
         ];
+        $this->page = 'config_page';
 
-		$this->author = 'Imatic Software s.r.o.';
-		$this->contact = 'info@imatic.cz';
-		$this->url = 'https://www.imatic.cz/';
-	}
+        $this->author = 'Imatic Software s.r.o.';
+        $this->contact = 'info@imatic.cz';
+        $this->url = 'https://www.imatic.cz/';
+    }
 
     public function hooks(): array
     {
@@ -39,7 +40,7 @@ class ImaticFormattingPlugin extends MantisPlugin
             'include_prism' => true,
             'toastui_editor' => [
                 'enabled' => true,
-                'textAreas'=> [
+                'textAreas' => [
                     'description',
                     'additional_info',
                     'additional_information',
@@ -56,37 +57,31 @@ class ImaticFormattingPlugin extends MantisPlugin
                         'allowTags' => ['a', 'b', 'i', 'strong', 'em', 'p', 'br', 'ul', 'ol', 'li', 'code', 'pre'],
                     ],
                 ],
-            ],
-            'html_purifier' => [
-                'allowed' => 'p,b,strong,i,em,u,a[href|target|rel],br,ul,ol,li,code,pre,span[class],h1,h2,h3,h4,h5,h6,blockquote,hr,img[src|alt|title|width|height]',
-                'safe_embed' => true,
-                'safe_object' => true,
-                'safe_iframe' => true,
-                'allowed_frame_targets' => ['_blank'],
-            ],
+            ]
         ];
     }
 
-	private function getOneLineConverter(): MarkdownConverterInterface {
-		static $converter = null;
-		if ($converter === null) {
-			$environment = new Environment();
-			$environment->addExtension(new InlinesOnlyExtension());
-			$converter = new CommonMarkConverter([
-				'html_input' => 'escape',
-				'allow_unsafe_links' => false,
-			], $environment);
-		}
+    private function getOneLineConverter(): MarkdownConverterInterface
+    {
+        static $converter = null;
+        if ($converter === null) {
+            $environment = new Environment();
+            $environment->addExtension(new InlinesOnlyExtension());
+            $converter = new CommonMarkConverter([
+                'html_input' => 'escape',
+                'allow_unsafe_links' => false,
+            ], $environment);
+        }
 
-		return $converter;
-	}
+        return $converter;
+    }
 
     private function getMultiLineConverter(): MarkdownConverterInterface
     {
         static $converter = null;
         if ($converter === null) {
             $converter = new GithubFlavoredMarkdownConverter([
-                'html_input' => 'allow', // It is purified before usage by HTMLPurifier in display_formatted_hook method
+                'html_input' => 'allow', // Purified by MantisBT
                 'allow_unsafe_links' => false,
             ]);
         }
@@ -94,31 +89,15 @@ class ImaticFormattingPlugin extends MantisPlugin
         return $converter;
     }
 
-	public function convert(string $text): string {
-        $converter = $this->getConverter();
-		return string_process_bugnote_link(string_process_bug_link(mention_format_text($converter->convertToHtml($text))));
-	}
-
-    private function  purifyHtml($html)
+    public function convert(string $text): string
     {
-        $config = HTMLPurifier_Config::createDefault();
-
-        $config->set('HTML.Allowed', plugin_config_get('html_purifier.allowed'));
-        $config->set('HTML.SafeEmbed', plugin_config_get('html_purifier.safe_embed'));
-        $config->set('HTML.SafeObject', plugin_config_get('html_purifier.safe_object'));
-        $config->set('HTML.SafeIframe', plugin_config_get('html_purifier.safe_iframe'));
-        $config->set('Attr.AllowedFrameTargets', plugin_config_get('html_purifier.allowed_frame_targets'));
-
-        $purifier = new \HTMLPurifier($config);
-        return $purifier->purify($html);
+        $converter = $this->getConverter();
+        return string_process_bugnote_link(string_process_bug_link(mention_format_text($converter->convertToHtml($text))));
     }
-
 
     public function display_formatted_hook($p_event, $p_string, $p_multiline = true)
     {
-        $purified_html = $this->purifyHtml($p_string);
-
-        return $this->convert($purified_html);
+        return $this->convert($p_string);
     }
 
     private function getConverter($p_multiline = true): MarkdownConverterInterface
@@ -126,14 +105,15 @@ class ImaticFormattingPlugin extends MantisPlugin
         return $p_multiline ? $this->getMultiLineConverter() : $this->getOneLineConverter();
     }
 
-	private function prism_includes() {
-		if (!plugin_config_get('include_prism', null, true)) {
-			return '';
-		}
+    private function prism_includes()
+    {
+        if (!plugin_config_get('include_prism', null, true)) {
+            return '';
+        }
 
-		return '<link rel="stylesheet" type="text/css" href="' . plugin_file('prism.css') . '&v=' . $this->version . '" />'
-				. '<script async type="text/javascript" src="' . plugin_file( 'prism.js' ) . '&v=' . $this->version . '"></script>';
-	}
+        return '<link rel="stylesheet" type="text/css" href="' . plugin_file('prism.css') . '&v=' . $this->version . '" />'
+            . '<script async type="text/javascript" src="' . plugin_file('prism.js') . '&v=' . $this->version . '"></script>';
+    }
 
     public function layout_resources_hook()
     {
