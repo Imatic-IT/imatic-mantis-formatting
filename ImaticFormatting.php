@@ -10,6 +10,7 @@ use League\CommonMark\MarkdownConverterInterface;
 
 class ImaticFormattingPlugin extends MantisPlugin
 {
+    const TOASTUI_ENABLED = 'plugin_ImaticFormatting_toastui_enabled';
     public function register(): void
     {
         $this->name = 'Imatic formatting';
@@ -31,6 +32,8 @@ class ImaticFormattingPlugin extends MantisPlugin
             'EVENT_DISPLAY_FORMATTED' => 'display_formatted_hook',
             'EVENT_LAYOUT_RESOURCES' => 'layout_resources_hook',
             'EVENT_LAYOUT_BODY_END' => 'layout_end_resources_hook',
+            'EVENT_ACCOUNT_PREF_UPDATE_FORM' => 'account_update_form',
+            'EVENT_ACCOUNT_PREF_UPDATE' => 'account_update',
         ];
     }
 
@@ -120,9 +123,33 @@ class ImaticFormattingPlugin extends MantisPlugin
         return $this->prism_includes();
     }
 
+    public function account_update_form($p_event, $p_user_id)
+    {
+        echo '<tr>' .
+            '<td class="category">' .
+            '<label for="ToastUIEnabled">Toast UI</label>' .
+            '</td>' .
+            '<td>' .
+            '<input id="ToastUIEnabled" type="checkbox" name="' . self::TOASTUI_ENABLED . '" value="1" ' . ($this->is_enabled() ? 'checked' : '') . '/>' .
+            '</td>' .
+            '</tr>';
+    }
+
+    public function account_update($p_event, $p_user_id)
+    {
+        config_set(self::TOASTUI_ENABLED, gpc_get_bool(self::TOASTUI_ENABLED, false), $p_user_id, ALL_PROJECTS);
+    }
+
+    public function is_enabled()
+    {
+        return auth_is_user_authenticated() && config_get(self::TOASTUI_ENABLED, false, auth_get_current_user_id(), ALL_PROJECTS);
+    }
+
     public function layout_end_resources_hook()
     {
-        $config = htmlspecialchars(json_encode(plugin_config_get('toastui_editor', [], true)));
+        $config = plugin_config_get('toastui_editor', [], true);
+        $config['enabledForUser'] = $this->is_enabled();
+        $config = htmlspecialchars(json_encode($config));
 
         return '<link rel="stylesheet" type="text/css" href="' . plugin_file('toast/toastui-editor.min.css') . '&v=' . $this->version . '" />
                 <link rel="stylesheet" type="text/css" href="' . plugin_file('toast/custom.css') . '&v=' . $this->version . '" />'

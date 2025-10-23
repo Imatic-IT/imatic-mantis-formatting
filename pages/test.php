@@ -1,3 +1,0 @@
-<?php
-
-echo '<h1>TEST ISSUE HTML EMAIL PREVIEW</h1>';

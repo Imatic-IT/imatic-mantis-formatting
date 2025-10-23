@@ -232,3 +232,161 @@
     color: white;
     padding: 0 2px;
 }
+
+
+#editor {
+  resize: vertical;
+  overflow: auto;
+}
+
+
+/* AUTOCOMPLETE WITHOUT TOAST UI  */
+
+/* 1*/
+
+.tribute-container-0,
+.tribute-container-0 ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.tribute-container-0 {
+    display: none;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    max-height: 200px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    transition: width 0.15s ease;
+    z-index: 1000;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    width: 100%;
+}
+
+.tribute-container-0 .tribute-item {
+    cursor: pointer;
+}
+
+.tribute-container-0 .tribute-highlight {
+    background-color: #007BFF;
+    color: white;
+    padding: 0 2px;
+}
+
+/*2*/
+.tribute-container-1,
+.tribute-container-1 ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.tribute-container-1 {
+    display: none;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    max-height: 200px;
+    overflow-y: auto;
+
+    overflow-x: hidden;
+    transition: width 0.15s ease;
+    z-index: 1000;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    width: 100%;
+}
+
+
+.tribute-container-1 .tribute-item {
+    cursor: pointer;
+}
+
+
+.tribute-container-1 .tribute-highlight {
+    background-color: #007BFF;
+    color: white;
+    padding: 0 2px;
+}
+
+/*3*/
+.tribute-container-2,
+.tribute-container-2 ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.tribute-container-2 {
+    display: none;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    max-height: 200px;
+    overflow-y: auto;
+
+    overflow-x: hidden;
+    transition: width 0.15s ease;
+    z-index: 1000;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    width: 100%;
+}
+
+.tribute-container-2 .tribute-item {
+    cursor: pointer;
+}
+
+.tribute-container-2 .tribute-highlight {
+    background-color: #007BFF;
+    color: white;
+    padding: 0 2px;
+}
+/*4*/
+.tribute-container-3,
+.tribute-container-3 ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.tribute-container-3 {
+    display: none;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    max-height: 200px;
+    overflow-y: auto;
+
+    overflow-x: hidden;
+    transition: width 0.15s ease;
+    z-index: 1000;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    width: 100%;
+}
+
+.tribute-container-3 .tribute-item {
+    cursor: pointer;
+}
+
+.tribute-container-3 .tribute-highlight {
+    background-color: #007BFF;
+    color: white;
+    padding: 0 2px;
+}
+
+
+.tribute-container-0,
+.tribute-container-1,
+.tribute-container-2,
+.tribute-container-3 {
+    transform: translateY(5px);
+}

@@ -1,9 +1,11 @@
 import { getSettings } from "./utils/mentionDom";
 import { createAutocomplete } from "./autocomplete";
+import { createAutocompleteWithoutToastUI } from "./autocomplete/autocompleteWithoutToastUI";
 import '@toast-ui/editor/dist/toastui-editor.css';
 import Editor from '@toast-ui/editor';
 
 function initEditor(textArea, settings, onReady) {
+
     const editorBarOffset = 70;
 
     const editorContainer = document.createElement('div');
@@ -12,14 +14,13 @@ function initEditor(textArea, settings, onReady) {
 
     const computedStyle = window.getComputedStyle(textArea);
     const baseHeight = parseFloat(computedStyle.height);
-    
+
     const heightValue = settings.options.height ? settings.options.height : baseHeight + editorBarOffset;
 
     const savedText = textArea.value || '';
 
     const editor = new Editor({
         el: editorContainer,
-        height: heightValue + 'px',
         initialEditType: settings.options.initialEditType || 'markdown',
         initialValue: savedText,
         previewStyle: settings.options.previewStyle || 'tab',
@@ -58,6 +59,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const settings = getSettings();
 
     if (!settings.enabled) return;
+
+
+    if (!settings.enabledForUser){
+        createAutocompleteWithoutToastUI();
+        return;
+    }
 
     settings.textAreas.forEach(id => {
 
