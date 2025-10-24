@@ -377,7 +377,7 @@ if ($t_flags['reporter_show'] || $t_flags['handler_show'] || $t_flags['due_date_
     if ($t_flags['reporter_show']) {
         echo '<th class="bug-reporter category">', lang_get('reporter'), '</th>';
         echo '<td class="bug-reporter">';
-        print_user_with_subject($t_issue['reporter']['id'], $f_issue_id);
+        echo 'test@example.com';
         echo '</td>';
     } else {
         $t_spacer += 2;
@@ -388,7 +388,7 @@ if ($t_flags['reporter_show'] || $t_flags['handler_show'] || $t_flags['due_date_
         echo '<th class="bug-assigned-to category">', lang_get('assigned_to'), '</th>';
         echo '<td class="bug-assigned-to">';
         if (isset($t_issue['handler'])) {
-            print_user_with_subject($t_issue['handler']['id'], $f_issue_id);
+            echo 'test@example.com';
         }
         echo '</td>';
     } else {
@@ -635,11 +635,6 @@ if (($t_flags['versions_target_version_show'] && isset($t_issue['target_version'
     echo '</tr>';
 }
 
-#
-# Bug Details Event Signal
-#
-
-event_signal('EVENT_VIEW_BUG_DETAILS', array($f_issue_id));
 
 # spacer
 echo '<tr class="spacer"><td colspan="6"></td></tr>';

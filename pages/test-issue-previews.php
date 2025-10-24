@@ -34,6 +34,12 @@ $t_mantis_dir = dirname(__FILE__) . DIRECTORY_SEPARATOR;
             <?php include $t_mantis_dir . 'test-issue-preview-plain-text.php'; ?>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="text-success"><span class="glyphicon glyphicon-file"></span> Email Preview email reporter indentation</h2>
+            <?php include $t_mantis_dir . 'test-issue-preview-email-reporter-indentation.php'; ?>
+        </div>
+    </div>
 
     <div class="row">
         <div class="col-md-12">

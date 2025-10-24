@@ -5,96 +5,289 @@ $t_result = [
         'id' => 1202,
         'summary' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit [1111111]',
         'description' => <<<EOD
-# Markdown Test Issue
+Email From: "Microsoft Azure" <azure-noreply@microsoft.com>
+Email To: trivi@it.imatic.cz
+[Email link](thunderlink://messageid=20251015134623.7d9d336a25e3605d@azns.microsoft.com)
+
+Email from: "Microsoft Azure" <azure-noreply@microsoft.com>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+
+    <style>
+
+        .preheader {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0;
+            color: #f4f4f4;
+            height: 0;
+            width: 0;
+            line-height: 1px;
+            font-size: 1px;
+            max-height: 0;
+            max-width: 0;
+            overflow: hidden;
+        }
+
+        .main-container {
+            font-family: "Segoe UI", -apple-system, system-ui, BlinkMacSystemFont, Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-weight: 400;
+            /*color: #1a1a1a;*/
+            margin: auto;
+            max-width: 616px !important;
+        }
+
+        .body-container {
+            padding: 10px 25px 0px 25px;
+        }
+
+        .body-text {
+            line-height: 20px;
+            font-size: 14px;
+            text-align: left;
+        }
+
+        .bold {
+            font-weight: 600 !important;
+        }
+
+        .body-link {
+            color: #0072c6;
+            text-decoration: none;
+        }
 
 
-## Headings
-# H1
-## H2
-### H3
-#### H4
-##### H5
-###### H6
+        .body-text-title {
+            font-family: "Segoe UI", -apple-system, system-ui, BlinkMacSystemFont, Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-weight: 400;
+            padding: 0;
+            margin-bottom: 10px;
+            line-height: 30px;
+            font-size: 24px;
+        }
+
+        .body-text-header {
+            font-family: "Segoe UI", -apple-system, system-ui, BlinkMacSystemFont, Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-weight: 400;
+            padding: 0;
+            margin-bottom: 10px;
+            line-height: 26px;
+            font-size: 20px;
+        }
+
+        .body-table {
+            display: inline-block;
+            border: none;
+            border-collapse: collapse;
+            margin: 15px 0px 15px 0px;
+        }
+
+        .table-cell {
+            font-family: "Segoe UI", -apple-system, system-ui, BlinkMacSystemFont, Roboto, "Helvetica Neue", Arial, sans-serif;
+            /*color: #1a1a1a;*/
+            border-collapse: collapse;
+            border: 1px solid black;
+            padding: 5px;
+            text-align: center;
+        }
+
+        .code {
+            background: #f4f4f4;
+            background-color: #f4f4f4;
+            border-radius: 3px;
+            color: #1a1a1a;
+            display: inline-block;
+            font-family: "Courier New", Courier, monospace;
+            font-size: 12px;
+            margin: 2px;
+            padding: 2px;
+            max-width: 616px;
+            overflow-wrap: break-word;
+        }
+
+        .accountinfo-container {
+            padding: 0px 25px 25px 25px;
+        }
+
+        .accountinfo-card {
+            border-bottom: 1px solid #dddddd;
+            padding-bottom: 15px;
+        }
+
+        .survey-container {
+            padding: 0px 25px 15px 25px;
+        }
+
+        .survey-link {
+            color: #4875c7;
+            font-family: "Segoe UI", -apple-system, system-ui, BlinkMacSystemFont, Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-weight: 400;
+            font-size: 18px;
+            padding: 5px;
+            Margin: 0;
+            text-align: center;
+            line-height: 20px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .footer-container {
+            padding: 25px;
+            background-color: #f4f4f4;
+        }
+
+        .azurelogo-container {
+            padding: 0px 30px 0px 25px;
+        }
+
+        .azure-logo {
+            height: 22px !important;
+            width: 155px !important;
+        }
+
+        .microsoft-logo {
+            outline: none;
+            text-decoration: none;
+            width: 103px;
+            max-width: 100%;
+            clear: both;
+            display: block;
+            height: 22px;
+        }
+
+        .footer-text {
+            Margin: 0;
+            color: #6a6a6a;
+            font-family: "Segoe UI", -apple-system, system-ui, BlinkMacSystemFont, Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-weight: 400;
+            padding: 0;
+            text-align: left;
+            line-height: 18px !important;
+            font-size: 12px !important;
+            Margin-bottom: 6px;
+            word-wrap: normal;
+        }
+
+        .footer-link {
+            color: #6a6a6a;
+            font-family: "Segoe UI", -apple-system, system-ui, BlinkMacSystemFont, Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-weight: 400;
+            text-decoration: underline;
+        }
+
+        .social-icon {
+            height: 16px !important;
+            width: 26px;
+            margin-bottom: 10px;
+        }
+    </style>
+
+</head>
+<body>
 
 
-## Text styles
-**Bold text**
-*Italic text*
-***Bold and Italic***
-~~Strikethrough~~
+    <div class="preheader">
+
+        Some Azure VM types you may use are retiring.
+
+    </div>
 
 
-## Lists
 
 
-### Unordered
-- Item 1
-- Item 2
-- Subitem 2a
-- Subitem 2b
-- Item 3
+
+    <table class="main-container" align="center" width=616>
+        <tbody>
+            <tr>
+                <td class="azurelogo-container">
+                    <img class="azure-logo" src="https://azureservicemail-logo-bmgyckasdhepaxfy.b02.azurefd.net/logos/LogoAzureGrey.png" alt="Microsoft Azure" title="Microsoft Azure" height=22 width=155>
+                </td>
+            </tr>
+            <tr>
+                <td class="body-container">
+                    <div style="border-bottom: 1px solid #dddddd; padding-bottom: 15px; max-width: 616px; overflow-wrap: break-word;">
+                        <h1 class="body-text-header">
+	Migrate retiring Azure Virtual Machines (VMs) to latest-generation VMs before 15 November 2028
+</h1><p class="body-text"><em>You&#39;re receiving this notification because you&#39;re associated with one or more Azure subscriptions that use, or have used, VM types that are retiring.</em></p><p class="body-text">On 15 November 2028,&nbsp;<a class="body-link" target="_blank" href="https://aka.ms/AzureVMRetirementUpdate_Sept2025">we&#39;ll be retiring</a><b>&nbsp;F, Fs, Fsv2, Lsv2, G, Gs, Av2, Amv2, and B-series</b>&nbsp;<b>Azure VMs.&nbsp;</b>You won&#39;t be able to use or purchase these VMs, or any constrained core sizes that are part of the retiring VM series, after that date.</p><h2 class="body-text-header">
+	Required action
+</h2><p class="body-text">To ensure your applications and workloads will be operating in the future,&nbsp;<a class="body-link" target="_blank" href="https://learn.microsoft.com/azure/virtual-machines/sizes/resize-vm?tabs=portal"><b>migrate</b></a>&nbsp;your F, Fs, Fsv2, Lsv2, G, Gs, Av2, Amv2, and B-series VMs workloads to a newer VM series.</p><p class="body-text">See&nbsp;<a class="body-link" target="_blank" href="https://aka.ms/VirtualMachinesMigrationGuide_Sept2025">our migration guide</a>&nbsp;for more information on migrating to the latest-generation VMs and other VM sizes affected by this retirement.</p><p class="body-text">For pricing details, please refer to the&nbsp;<a class="body-link" target="_blank" href="https://azure.microsoft.com/pricing/details/virtual-machines/linux-previous/">VM pricing pages</a>&nbsp;and the&nbsp;<a class="body-link" target="_blank" href="https://azure.microsoft.com/pricing/calculator/">pricing calculator</a>.</p><h2 class="body-text-header">
+	Help and support
+</h2><p class="body-text">If you have questions or concerns, please follow the&nbsp;<a class="body-link" target="_blank" href="https://learn.microsoft.com/azure/azure-portal/supportability/how-to-create-azure-support-request">instructions to create a support request</a>. You can also get answers from community experts in&nbsp;<a class="body-link" target="_blank" href="https://aka.ms/AzStorageAccountQA">Microsoft Q&amp;A</a>. If you have a support plan and you need technical help, open the&nbsp;<a class="body-link" target="_blank" href="https://portal.azure.com/">Azure portal</a>&nbsp;and select the question mark icon at the top of the page.</p><p class="body-text"><em>Learn more about service retirements that may impact your resources in the</em>&nbsp;<a class="body-link" target="_blank" href="https://aka.ms/ServicesRetirementWorkbook"><em>Azure Retirement Workbook</em></a>.<em>&nbsp;Please note that retirements may not be visible in the workbook for up to two weeks after being announced.</em></p>
+                    </div>
+                </td>
+            </tr>
 
 
-### Ordered
-1. First
-2. Second
-3. Third
-1. Subfirst
-2. Subsecond
+            <tr>
+                <td class="accountinfo-container">
+                    <h2 class="body-text-header">Account Information</h2>
+
+                    <div class="accountinfo-card">
+
+                        <p class="body-text"><b>Subscription ID: </b>33ac82ab-25c4-4742-a104-b93affb1020c</p><p class="body-text"><b>Subscription name: </b>BUSINESSDEVILS</p>
+
+                    </div>
+
+                </td>
+            </tr>
 
 
-## Links
-[Static Example link](https://example.com/path/to/page?foo=1&bar=2&baz=3)
-[Another Example link](https://example.org/test?param1=1&param2=2)
+
+            <tr>
+                <td class="survey-container">
+                    <p class="body-text">Please help us improve our communication by telling us what you think about this email in a <a class="body-link" target="_blank" href="https://aka.ms/SNFeedbackSurvey">survey</a>.</p>
+                </td>
+            </tr>
 
 
-## Images
-![Example Image](https://via.placeholder.com/150)
+            <tr>
+                <td class="footer-container">
 
+                    <a href="https://www.facebook.com/microsoftazure" target="_blank" style="text-decoration: none; border: none;">
+                        <img src="https://azureservicemail-logo-bmgyckasdhepaxfy.b02.azurefd.net/logos/facebook-grey.png" alt="Facebook" title="Facebook" class="social-icon" height=16 width=17 style="width: 17px;">
+                    </a>
 
-## Blockquotes
-> This is a blockquote.
->
-> Multiple lines supported.
+                    <a href="https://twitter.com/azure" target="_blank" style="text-decoration: none; border: none;">
+                        <img src="https://azureservicemail-logo-bmgyckasdhepaxfy.b02.azurefd.net/logos/Logo-X.png" alt="Twitter" title="Twitter" class="social-icon" height=16 width=26>
+                    </a>
 
+                    <a href="https://www.youtube.com/@MicrosoftAzure" target="_blank" style="text-decoration: none; border: none;">
+                        <img src="https://azureservicemail-logo-bmgyckasdhepaxfy.b02.azurefd.net/logos/youtube-grey.png" alt="YouTube" title="YouTube" class="social-icon" height=16 width=26>
+                    </a>
 
-## Inline code
-Here is some `inline code`.
+                    <a href="https://www.linkedin.com/showcase/microsoft-developers/" target="_blank" style="text-decoration: none; border: none;">
+                        <img src="https://azureservicemail-logo-bmgyckasdhepaxfy.b02.azurefd.net/logos/linkedin-grey.png" alt="LinkedIn" title="LinkedIn" class="social-icon" height=16 width=26>
+                    </a>
 
+                    <p class="footer-text">
+                        This message from Microsoft is an important part of a program, service, or product that you or your company purchased or participates in. Microsoft respects your privacy. Please read our
+                        <a class="footer-link" href="https://privacy.microsoft.com/privacystatement" target="_blank" title="Privacy Statement">
+                            Privacy Statement
+                        </a>.
 
-## Code blocks
-```php
-<?php
-echo "Hello World";
-function test($param) {
-return $param * 2;
-}
-?>
-```
+                    </p>
+                    <p class="footer-text">
+                        This is a mandatory service communication. To set your contact preferences for other communications, visit the
+                        <a class="footer-link" href="https://account.microsoft.com/profile/communications" target="_blank" title="Promotional Communications Manager">
+                            Promotional Communications Manager
+                        </a>.
 
+                    </p>
+                    <p class="footer-text">
+                        Microsoft Corporation, <span class="no-wrap" style="display: inline-block;word-break: keep-all; text-decoration: none;">One Microsoft Way, Redmond, WA 98052</span>
+                    </p>
+                    <img class="microsoft-logo" src="https://azureservicemail-logo-bmgyckasdhepaxfy.b02.azurefd.net/logos/LogoMicrosoftGrey.png" alt="Microsoft" title="Microsoft" height=22 width=103>
+                </td>
+            </tr>
 
-```javascript
-console.log("Hello from JS");
-```
+        </tbody>
+    </table>
 
-
-## Tables
-| Name | Age | City |
-|-----------|-----|------------|
-| John Doe | 30 | New York |
-| Jane Doe | 25 | Los Angeles|
-| Foo Bar | 40 | Chicago |
-
-
-## Horizontal rule
----
-
-
-## Task lists
-- [x] Task 1 done
-- [ ] Task 2 not done
-- [ ] Task 3 pending
-
+<img width="1" height="1" alt="" src="http://email.azns.microsoft.com/o/eJxczLFOwzAQgOGnibdEZ198sQcPFQKpAwxQEOv1nIBVbKPULSJPj2Bk_n99u-3hvI-BjhNHctRLnKQfSahnh3O_iGXrlpmdIxXDQoyg1Rz0RGDReofqPSzuCF4MGU2aPGmHlsAfJw0yIYhWKRgwVoO2GkcyOEzRR0RiY2cksLEbgbdyHnKStZ7r0gapWa2hremauhFSG1LmlmSQTbVwmzl9PNXLKnOHO5asWjisLKdU3vaxw93rPb30j3egWripOV9KEm6plr-oNQAYAj-SN-b_cvj-_EWfy6nUr6KuwfwEAAD___BdVu0"></body>
+</html>
 EOD,
         'project' => [
             'id' => 4,
@@ -710,7 +903,6 @@ if (($t_flags['versions_target_version_show'] && isset($t_issue['target_version'
 }
 
 
-
 # spacer
 echo '<tr class="spacer"><td colspan="6"></td></tr>';
 echo '<tr class="hidden"></tr>';
@@ -750,6 +942,7 @@ if ($t_flags['additional_information_show'] && isset($t_issue['additional_inform
     echo '<td class="bug-additional-information" colspan="5">', string_display_links($t_issue['additional_information']), '</td>';
     echo '</tr>';
 }
+
 # Tagging
 if ($t_flags['tags_show']) {
     echo '<tr>';

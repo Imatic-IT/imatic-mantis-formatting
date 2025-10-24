@@ -7,6 +7,7 @@ use League\CommonMark\Environment;
 use League\CommonMark\Extension\InlinesOnly\InlinesOnlyExtension;
 use League\CommonMark\GithubFlavoredMarkdownConverter;
 use League\CommonMark\MarkdownConverterInterface;
+use League\CommonMark\EnvironmentInterface;
 
 class ImaticFormattingPlugin extends MantisPlugin
 {
@@ -84,7 +85,7 @@ class ImaticFormattingPlugin extends MantisPlugin
         static $converter = null;
         if ($converter === null) {
             $converter = new GithubFlavoredMarkdownConverter([
-                'html_input' => 'allow', // Purified by MantisBT
+                'html_input' => EnvironmentInterface::HTML_INPUT_ALLOW,
                 'allow_unsafe_links' => false,
             ]);
         }
@@ -95,6 +96,10 @@ class ImaticFormattingPlugin extends MantisPlugin
     public function convert(string $text): string
     {
         $converter = $this->getConverter();
+        // Remove indentation (4 or more spaces or tabs) at the start of lines.
+        // CommonMark treats lines with 4+ leading spaces as "code blocks" (<pre><code>) in class /league/commonmark/src/Extension/CommonMark/Renderer/Block/IndentedCodeRenderer.php,
+        $text = preg_replace('/^[ \t]{4,}/m', '', $text);
+
         return string_process_bugnote_link(string_process_bug_link(mention_format_text($converter->convertToHtml($text))));
     }
 
