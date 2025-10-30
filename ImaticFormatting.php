@@ -142,12 +142,21 @@ class ImaticFormattingPlugin extends MantisPlugin
 
     public function account_update($p_event, $p_user_id)
     {
-        config_set(self::TOASTUI_ENABLED, gpc_get_bool(self::TOASTUI_ENABLED, false), $p_user_id, ALL_PROJECTS);
+        $value = gpc_get(self::TOASTUI_ENABLED, null);
+
+        config_set(self::TOASTUI_ENABLED, $value, $p_user_id, ALL_PROJECTS);
     }
 
     public function is_enabled()
     {
-        return auth_is_user_authenticated() && config_get(self::TOASTUI_ENABLED, false, auth_get_current_user_id(), ALL_PROJECTS);
+        $user_setting = config_get(
+            self::TOASTUI_ENABLED,
+            null,
+            auth_get_current_user_id(),
+            ALL_PROJECTS
+        );
+
+        return $user_setting === null ? true : (bool)$user_setting;
     }
 
     public function layout_end_resources_hook()

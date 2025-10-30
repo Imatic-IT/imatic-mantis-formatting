@@ -36,7 +36,12 @@ function initEditor(textArea, settings, onReady) {
             ['code', 'codeblock'],
             ['scrollSync']
         ],
-        autofocus: false
+        autofocus: false,
+        hooks: {
+            addImageBlobHook: function (blob, callback) {
+                return false;
+            }
+        }
     });
     editor.on('change', () => {
         textArea.value = editor.getMarkdown();
@@ -61,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!settings.enabled) return;
 
 
-    if (!settings.enabledForUser){
+    if (!settings.enabledForUser) {
         createAutocompleteWithoutToastUI();
         return;
     }
