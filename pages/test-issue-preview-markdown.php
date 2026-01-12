@@ -27,20 +27,22 @@ $t_result = [
 ## Lists
 
 
+## Lists
+
 ### Unordered
 - Item 1
 - Item 2
-- Subitem 2a
-- Subitem 2b
+  - Subitem 2a
+  - Subitem 2b
 - Item 3
-
 
 ### Ordered
 1. First
 2. Second
 3. Third
-1. Subfirst
-2. Subsecond
+   1. Subfirst
+   2. Subsecond
+
 
 
 ## Links
@@ -56,6 +58,20 @@ $t_result = [
 > This is a blockquote.
 >
 > Multiple lines supported.
+
+> Outer quote
+> > Nested quote
+> > > Deeply nested quote
+
+## Escaped characters
+\*This text is not italic\*
+\# Not a heading
+
+## Links with titles
+[Link with title](https://example.com "This is a tooltip")
+
+## Images with titles and alt text
+![Alt text for image](https://via.placeholder.com/100 "Image title")
 
 
 ## Inline code
@@ -94,6 +110,14 @@ console.log("Hello from JS");
 - [x] Task 1 done
 - [ ] Task 2 not done
 - [ ] Task 3 pending
+
+## Tables with alignment
+
+| Left | Center | Right |
+|:---- |:------:| -----:|
+| a    | b      | c     |
+| 123  | 456    | 789   |
+
 
 EOD,
         'project' => [

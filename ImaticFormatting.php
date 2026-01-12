@@ -93,14 +93,64 @@ class ImaticFormattingPlugin extends MantisPlugin
         return $converter;
     }
 
-    public function convert(string $text): string
+    private function sanitizeEmailHtml(string $text): string
     {
-        $converter = $this->getConverter();
-        // Remove indentation (4 or more spaces or tabs) at the start of lines.
-        // CommonMark treats lines with 4+ leading spaces as "code blocks" (<pre><code>) in class /league/commonmark/src/Extension/CommonMark/Renderer/Block/IndentedCodeRenderer.php,
         $text = preg_replace('/^[ \t]{4,}/m', '', $text);
 
-        return string_process_bugnote_link(string_process_bug_link(mention_format_text($converter->convertToHtml($text))));
+        $text = preg_replace('~<meta[^>]*>~i', '', $text);                  // <meta charset=...>
+        $text = preg_replace('~<title>.*?</title>~is', '', $text);          // <title></title>
+        $text = preg_replace('~<style[^>]*>.*?</style>~is', '', $text);     //  <style> ...</style>
+        $text = preg_replace('~<div class="preheader">.*?</div>~is', '', $text); // preheader
+        $text = preg_replace('~<img[^>]*src="http[^"]*email\.azns\.microsoft\.com[^"]*"[^>]*>~i', '', $text); // tracking pixel
+        $text = preg_replace('#<script[^>]*>.*?</script>#is', '', $text);      // <script> ...</script>
+
+        return html_entity_decode($text, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+    }
+
+
+    private function isHtmlEmail(string $text): bool
+    {
+        $decoded = html_entity_decode($text, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+
+        // Minimal HTML structure
+        if (preg_match('/<html|<body|<head/i', $decoded)) {
+            return true;
+        }
+
+        // Tables typical for email layouts
+        if (preg_match_all('/<table/i', $decoded) > 0) {
+            return true;
+        }
+
+        // Inline style / style blocks
+        if (preg_match('/<style/i', $decoded)) {
+            return true;
+        }
+
+        // Mailto links (reply to)
+        if (preg_match('/<a[^>]+mailto:/i', $decoded)) {
+            return true;
+        }
+
+        return false;
+    }
+
+
+    public function convert(string $text): string
+    {
+        if ($this->isHtmlEmail($text)) {
+            $text =  $this->sanitizeEmailHtml($text);
+        }
+
+        $converter = $this->getConverter();
+
+        return string_process_bugnote_link(
+            string_process_bug_link(
+                mention_format_text(
+                    $converter->convertToHtml($text)
+                )
+            )
+        );
     }
 
     public function display_formatted_hook($p_event, $p_string, $p_multiline = true)
