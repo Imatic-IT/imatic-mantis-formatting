@@ -104,7 +104,28 @@ class ImaticFormattingPlugin extends MantisPlugin
         $text = preg_replace('~<img[^>]*src="http[^"]*email\.azns\.microsoft\.com[^"]*"[^>]*>~i', '', $text); // tracking pixel
         $text = preg_replace('#<script[^>]*>.*?</script>#is', '', $text);      // <script> ...</script>
 
-        return html_entity_decode($text, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+        
+
+
+        $text = html_entity_decode($text, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+
+        // Extract only body content — prevents <html>/<head>/<body> from corrupting page layout
+        if (stripos($text, '<body') !== false) {
+            $dom = new DOMDocument();
+            libxml_use_internal_errors(true);
+            $dom->loadHTML('<?xml encoding="UTF-8">' . $text, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+            libxml_clear_errors();
+            $body = $dom->getElementsByTagName('body')->item(0);
+            if ($body !== null) {
+                $fragment = '';
+                foreach ($body->childNodes as $child) {
+                    $fragment .= $dom->saveHTML($child);
+                }
+                $text = $fragment;
+            }
+        }
+
+        return $text;
     }
 
 
@@ -139,7 +160,9 @@ class ImaticFormattingPlugin extends MantisPlugin
     public function convert(string $text): string
     {
         if ($this->isHtmlEmail($text)) {
-            $text =  $this->sanitizeEmailHtml($text);
+            $html = html_entity_decode($text, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+            $html = preg_replace('#<script[^>]*>.*?</script>#is', '', $html);
+            return '<iframe srcdoc="' . htmlspecialchars($html, ENT_QUOTES, 'UTF-8') . '" style="width:100%;min-height:500px;border:none;" sandbox="allow-same-origin" loading="lazy"></iframe>';
         }
 
         $converter = $this->getConverter();
