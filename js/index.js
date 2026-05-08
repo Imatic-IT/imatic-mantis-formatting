@@ -31,7 +31,7 @@ function initEditor(textArea, settings, onReady) {
         useDefaultHTMLSanitizerOptions: settings.options.useDefaultHTMLSanitizerOptions || {},
         toolbarItems: settings.options.toolbarItems || [
             ['heading', 'bold', 'italic', 'strike'],
-            ['hr', 'quote', 'ul', 'ol'],
+            ['hr', 'quote', 'ul', 'ol', 'task'],
             ['table', 'link', 'image'],
             ['code', 'codeblock'],
             ['scrollSync']
