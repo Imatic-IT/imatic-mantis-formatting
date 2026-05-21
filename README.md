@@ -68,6 +68,23 @@ public function config(): array
 
 
 
+## User mentions (autocomplete)
+
+When typing `@` in any supported text area, the plugin shows an autocomplete dropdown of assignable users in the current project so you can quickly insert `@username` mentions. The user list is derived from MantisBT's assignee selector (`select[name="handler_id"]`), so only users that can be set as a handler in the current project context are offered — special pseudo-entries such as `[Myself]` and `[Reporter]` are filtered out.
+
+Supported text areas (both plain and ToastUI/WYSIWYG mode):
+
+- `#summary`
+- `#description`
+- `#steps_to_reproduce`
+- `#additional_info`, `#additional_information`
+- `#bugnote_text`
+
+The autocomplete UI is powered by [Tribute.js](https://github.com/zurb/tribute) (bundled, no runtime CDN).
+
+Mention rendering and notifications are handled by MantisBT core: after the markdown converter runs, the plugin pipes the output through `mention_format_text()`, which turns `@username` into a clickable link and (when `$g_enable_user_mention` is enabled in MantisBT config) sends the standard mention notification to that user. See the [MantisBT User Mention configuration](https://www.mantisbt.org/docs/master/en-US/Admin_Guide/html-desktop/admin.preferences.usermention.html) for the notification settings.
+
+
 ## Preview Test Pages
 
 The plugin provides **test pages** where you can see how your Markdown and HTML formatting will be rendered before using it in actual issues.
