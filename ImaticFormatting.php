@@ -84,7 +84,12 @@ class ImaticFormattingPlugin extends MantisPlugin
     {
         static $converter = null;
         if ($converter === null) {
-            $converter = new GithubFlavoredMarkdownConverter([
+            // GitHub-flavored Markdown, but with the stock TaskList extension
+            // replaced by one that renders EVERY "[ ]"/"[x]" marker as a
+            // checkbox (also mid-line and several per line), not only the first
+            // one in a list item.
+            require_once __DIR__ . '/inc/Checkbox/CheckboxMarkdown.php';
+            $converter = \ImaticFormatting\Checkbox\CheckboxMarkdown::createConverter([
                 'html_input' => EnvironmentInterface::HTML_INPUT_ALLOW,
                 'allow_unsafe_links' => false,
             ]);
@@ -103,9 +108,6 @@ class ImaticFormattingPlugin extends MantisPlugin
         $text = preg_replace('~<div class="preheader">.*?</div>~is', '', $text); // preheader
         $text = preg_replace('~<img[^>]*src="http[^"]*email\.azns\.microsoft\.com[^"]*"[^>]*>~i', '', $text); // tracking pixel
         $text = preg_replace('#<script[^>]*>.*?</script>#is', '', $text);      // <script> ...</script>
-
-        
-
 
         $text = html_entity_decode($text, ENT_QUOTES | ENT_HTML5, 'UTF-8');
 
